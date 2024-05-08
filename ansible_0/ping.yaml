@@ -1,0 +1,16 @@
+---
+- name: ping all servers
+  hosts: all
+  tasks:
+   - name: ping remote servers
+     ping:
+
+   - name: uptime
+     shell: uptime
+
+   - name: whoami
+     shell: whoami
+     register: whoami_result
+
+   - debug:
+      msg: "{{whoami_result.stdout}}"

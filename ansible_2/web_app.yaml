@@ -1,0 +1,26 @@
+---
+- name: Install and Deploy webserver and app
+  hosts: web
+  become: true
+  tasks:
+    - name: Install apache2 and rsyslogd
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - apache2
+        - rsyslog
+
+    - name: Start services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+      loop:
+        - apache2
+        - rsyslog
+
+    - name: Copy html
+      ansible.builtin.template:
+        src: /home/student/workspace/ansible_2/index.html
+        dest: /var/www/html/index.html
+        mode: 0644

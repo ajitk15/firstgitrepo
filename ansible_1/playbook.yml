@@ -1,0 +1,13 @@
+---
+- name: ping all servers
+  hosts: all
+  vars:
+    playbook_level_var: "playbook vars"
+  tasks:
+    - name: print playbook level variable
+      ansible.builtin.debug:
+        msg: "I like {{ playbook_level_var }}"
+
+    - name: print group level variable
+      ansible.builtin.debug:
+        msg: "I like {{ fav_drink }}"
